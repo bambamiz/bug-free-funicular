@@ -34,6 +34,7 @@ def turn(len, word)
   blank = blank_word(len, word)
   t = len
   i = 0
+  usedwords = ""
 
   #loop that will run for a number of turns. 
   while i < len
@@ -48,15 +49,23 @@ def turn(len, word)
       t+=1
       i-=1
     end
-    
+    #checks to see if the word has been guessed before the loop ends
     if blank.eql?(word)
       i = len + 1
     end
 
+    if usedwords.include?(guess)
+      i+=1
+      t-=1
+    end
+
     i+=1
     t-=1
+    usedwords = guess + usedwords
+
     puts blank
-    puts "\n", "\n"
+    puts "Letters you've already used #{usedwords}"
+    puts "\n", "\n", "\n", "\n", "\n"
   end
   if blank.eql?(word)
     puts "you win!!!"
