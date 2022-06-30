@@ -1,5 +1,12 @@
-#word will be pulled from file "house" is temp
-word = "house"
+if File.file?("lib/google-10000-english-no-swears.txt")
+  word_bank = File.open("lib/google-10000-english-no-swears.txt", "r") {|file| file.read}
+end
+
+word_bank = word_bank.split
+word_bank.delete_if {|word| word.length < 5}
+
+
+word = word_bank.sample(1).join
 class Hangman
   attr_accessor :word, :len
   def initialize(word)
@@ -71,6 +78,8 @@ def turn(len, word)
     puts "you win!!!"
   else
     puts "you lose!!"
+    puts "you enterd  #{blank}"
+    puts "the word is #{word}"
   end
 end
 
